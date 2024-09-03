@@ -21,12 +21,13 @@ const Menu = ({ items }) => {
   const { addToCart } = useCart();
   const [quantities, setQuantities] = useState({});
 
-  const handleAddToCart = (item) => {
+  const handleAddToCart = (event, item) => {
+    event.stopPropagation();
     const quantity = quantities[item.id] || 1;
     addToCart(item, quantity);
   };
 
-  const handleDecrease = (itemId) => {
+  const handleDecrease = (event, itemId) => {
     setQuantities((prevQuantities) => {
       const currentQuantity = prevQuantities[itemId] || 1;
       if (currentQuantity > 1) {
@@ -36,7 +37,7 @@ const Menu = ({ items }) => {
     });
   };
 
-  const handleIncrease = (itemId) => {
+  const handleIncrease = (event, itemId) => {
     setQuantities((prevQuantities) => ({
       ...prevQuantities,
       [itemId]: (prevQuantities[itemId] || 1) + 1,
@@ -51,7 +52,9 @@ const Menu = ({ items }) => {
       <Grid container spacing={2}>
         {items.map((item) => (
           <Grid item xs={12} sm={6} md={3} key={item.id}>
-            <Card sx={{ width: "100%", height: 400 }} onClick={() => handleCardClick(item)}>
+            <Card
+              sx={{ width: "100%", height: 400 }}
+            >
               <CardActionArea>
                 <img
                   src={item.image}
@@ -78,7 +81,7 @@ const Menu = ({ items }) => {
                   >
                     <IconButton
                       color="primary"
-                      onClick={() => handleDecrease(item.id)}
+                      onClick={(event) => handleDecrease(event, item.id)}
                       disabled={(quantities[item.id] || 1) <= 1}
                     >
                       <RemoveCircleOutlineIcon />
@@ -88,18 +91,26 @@ const Menu = ({ items }) => {
                     </Typography>
                     <IconButton
                       color="primary"
-                      onClick={() => handleIncrease(item.id)}
+                      onClick={(event) => handleIncrease(event, item.id)}
                     >
                       <AddCircleOutlineIcon />
                     </IconButton>
                     <Button
                       variant="contained"
                       color="primary"
-                      sx={{ ml: 2 }}
+                      sx={{ ml: 1 }}
                       startIcon={<AddShoppingCartIcon />}
-                      onClick={() => handleAddToCart(item)}
+                      onClick={(event) => handleAddToCart(event, item)}
                     >
                       Add
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      sx={{ ml: 1 }}
+                      onClick={() => handleCardClick(item)}
+                    >
+                      View
                     </Button>
                   </Box>
                 </CardContent>
