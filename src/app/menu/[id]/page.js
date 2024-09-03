@@ -1,14 +1,5 @@
-// import { itemList } from "@/data";
-// export default function Page({ params }) {
-//   const selectedItem = itemList?.find(
-//     (item) => item.id === parseInt(params?.id)
-//   );
-//   return <div></div>;
-// }
-
-// FoodItemDetail.js
 import React from 'react';
-import { Card, CardMedia, CardContent, Typography, Box, Grid } from '@mui/material';
+import { Card, CardContent, Typography, Box, Grid } from '@mui/material';
 import { fetchData } from '@/fetchData';
 
 const FoodItemDetail = async({ params }) => {

@@ -12,7 +12,7 @@ import {
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { useCart } from "@/app/context/CartContext";
+import { useCart } from "@/context/CartContext";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -21,13 +21,12 @@ const Menu = ({ items }) => {
   const { addToCart } = useCart();
   const [quantities, setQuantities] = useState({});
 
-  const handleAddToCart = (event, item) => {
-    event.stopPropagation();
+  const handleAddToCart = (item) => {
     const quantity = quantities[item.id] || 1;
     addToCart(item, quantity);
   };
 
-  const handleDecrease = (event, itemId) => {
+  const handleDecrease = (itemId) => {
     setQuantities((prevQuantities) => {
       const currentQuantity = prevQuantities[itemId] || 1;
       if (currentQuantity > 1) {
@@ -37,7 +36,7 @@ const Menu = ({ items }) => {
     });
   };
 
-  const handleIncrease = (event, itemId) => {
+  const handleIncrease = (itemId) => {
     setQuantities((prevQuantities) => ({
       ...prevQuantities,
       [itemId]: (prevQuantities[itemId] || 1) + 1,
@@ -52,9 +51,7 @@ const Menu = ({ items }) => {
       <Grid container spacing={2}>
         {items.map((item) => (
           <Grid item xs={12} sm={6} md={3} key={item.id}>
-            <Card
-              sx={{ width: "100%", height: 400 }}
-            >
+            <Card sx={{ width: "100%", height: 400 }}>
               <CardActionArea>
                 <img
                   src={item.image}
@@ -81,7 +78,7 @@ const Menu = ({ items }) => {
                   >
                     <IconButton
                       color="primary"
-                      onClick={(event) => handleDecrease(event, item.id)}
+                      onClick={() => handleDecrease(item.id)}
                       disabled={(quantities[item.id] || 1) <= 1}
                     >
                       <RemoveCircleOutlineIcon />
@@ -91,7 +88,7 @@ const Menu = ({ items }) => {
                     </Typography>
                     <IconButton
                       color="primary"
-                      onClick={(event) => handleIncrease(event, item.id)}
+                      onClick={() => handleIncrease(item.id)}
                     >
                       <AddCircleOutlineIcon />
                     </IconButton>
@@ -100,7 +97,7 @@ const Menu = ({ items }) => {
                       color="primary"
                       sx={{ ml: 1 }}
                       startIcon={<AddShoppingCartIcon />}
-                      onClick={(event) => handleAddToCart(event, item)}
+                      onClick={() => handleAddToCart(item)}
                     >
                       Add
                     </Button>
