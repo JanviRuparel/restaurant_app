@@ -77,7 +77,7 @@ export default function RootLayout({ children }) {
               }}
               className="container flex justify-between"
             >
-              <Link href={"/"}>
+              <Link style={{margin: 15}} href={"/"}>
                 <Image src={Logo} width={200} height={200} alt="Fooedie eats" />
               </Link>
               <div
@@ -87,7 +87,7 @@ export default function RootLayout({ children }) {
                 }}
               >
                 <Link href={"/menu"}>
-                  <Button sx={{ m: 2, mr: 1 }} variant="outlined">
+                  <Button sx={{ m: 3, mr: 1 }} variant="outlined">
                     Menu
                   </Button>
                 </Link>

@@ -409,15 +409,28 @@ const Home = ({ items }) => {
     }));
   };
 
-  const images1 = [
-    <img src={"./banner.png"} width={1400} height={380} role="presentation" />,
-    <img src={"./banner1.png"} width={1400} height={380} role="presentation" />,
-    <img src={"./banner2.png"} width={1400} height={380} role="presentation" />,
-  ];
-
   return (
     <Box p={2}>
-      <AliceCarousel items={images1} autoPlay disableButtonsControls />
+      <AliceCarousel autoPlay disableButtonsControls>
+        <img
+          src={"./banner.png"}
+          width={1400}
+          height={380}
+          role="presentation"
+        />
+        <img
+          src={"./banner1.png"}
+          width={1400}
+          height={380}
+          role="presentation"
+        />
+        <img
+          src={"./banner2.png"}
+          width={1400}
+          height={380}
+          role="presentation"
+        />
+      </AliceCarousel>
       {/* <Box sx={{ flexGrow: 1, mt: 5 }} p={2}>
         <Grid container spacing={2}>
           {menu.map((item) => (

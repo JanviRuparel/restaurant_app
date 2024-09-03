@@ -18,7 +18,6 @@ import React from "react";
 
 const CartPage = () => {
   const { cartItems } = useCart();
-  console.log(cartItems, "cartitem");
 
   return (
     <Box p={5}>
@@ -28,7 +27,7 @@ const CartPage = () => {
           <List sx={{ width: "100%" }}>
             {cartItems?.map((data) => {
               return (
-                <Box>
+                <Box key={data.id}>
                   <ListItem alignItems="flex-start">
                     <ListItemAvatar>
                       <Avatar alt="Remy Sharp" src={data?.image} />
